@@ -1,5 +1,5 @@
-import React from "react";
-import LogoImg from "@/assets/logo.png";
+import React from 'react';
+import LogoImg from '@/assets/logo.png';
 
 // Header component
 export const Header: React.FC = () => (
