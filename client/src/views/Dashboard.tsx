@@ -6,7 +6,7 @@ export const Dashboard: React.FC<{
   currentUsage: number;
 }> = ({ readingToday, currentUsage }) => {
   return (
-    <section className="p-6 bg-white rounded-lg shadow mt-6 mx-4">
+    <section className="p-6 bg-white rounded-lg shadow mt-6">
       <h2 className="text-2xl font-semibold mb-6">Dashboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card>
