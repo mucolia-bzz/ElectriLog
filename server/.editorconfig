@@ -1,0 +1,67 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = false
+
+[*.yml]
+indent_style = space
+indent_size = 2
+
+[*.{kt,kts}]
+max_line_length = 160
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+# ktlint config
+# Disable all rules then explicitly enable what wee need
+# https://pinterest.github.io/ktlint/0.49.1/rules/standard/
+ktlint_code_style = android_studio
+ktlint_experimental = disabled
+ktlint_standard = disabled
+ktlint_standard_chain-wrapping = enabled
+ktlint_standard_comment-spacing = enabled
+ktlint_standard_filename = enabled
+ktlint_standard_import-ordering = enabled
+ktlint_standard_indent = enabled
+ktlint_standard_max-line-length = enabled
+ktlint_standard_modifier-order = enabled
+ktlint_standard_multiline-if-else = enabled
+ktlint_standard_no-blank-line-before-rbrace = enabled
+ktlint_standard_no-consecutive-blank-lines = enabled
+ktlint_standard_property-naming = enabled
+ktlint_standard_no-empty-class-body = enabled
+ktlint_standard_no-line-break-after-else = enabled
+ktlint_standard_no-line-break-before-assignment = enabled
+ktlint_standard_no-multi-spaces = enabled
+ktlint_standard_no-semi = enabled
+ktlint_standard_no-trailing-spaces = enabled
+ktlint_standard_no-unit-return = enabled
+ktlint_standard_no-unused-imports = enabled
+ktlint_standard_no-wildcard-imports = enabled
+ktlint_standard_package-name = enabled
+ktlint_standard_parameter-list-wrapping = enabled
+ktlint_standard_colon-spacing = enabled
+ktlint_standard_comma-spacing = enabled
+ktlint_standard_comment-spacing = enabled
+ktlint_standard_curly-spacing = enabled
+ktlint_standard_dot-spacing = enabled
+ktlint_standard_keyword-spacing = enabled
+ktlint_standard_op-spacing = enabled
+ktlint_standard_paren-spacing = enabled
+ktlint_standard_range-spacing = enabled
+ktlint_standard_string-template = enabled
+ktlint_standard_trailing-comma-on-call-site = enabled
+ktlint_standard_trailing-comma-on-declaration-site = enabled
+ktlint_standard_final-newline = enabled
+ktlint_standard_wrapping = enabled
+ktlint_standard_argument-list-wrapping = enabled
+ktlint_standard_enum-entry-name-case = enabled
+ktlint_standard_no-blank-lines-in-chained-method-calls = enabled
