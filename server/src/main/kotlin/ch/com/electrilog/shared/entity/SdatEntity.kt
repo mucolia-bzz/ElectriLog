@@ -1,8 +1,7 @@
-import com.fasterxml.jackson.annotation.*
 import com.fasterxml.jackson.dataformat.xml.annotation.*
 
 @JacksonXmlRootElement(localName = "ValidatedMeteredData_12", namespace = "http://www.strom.ch")
-data class ValidatedMeteredData(
+data class SdatEntity(
 	@JacksonXmlProperty(localName = "ValidatedMeteredData_HeaderInformation", namespace = "http://www.strom.ch")
 	val headerInformation: HeaderInformation? = null,
 

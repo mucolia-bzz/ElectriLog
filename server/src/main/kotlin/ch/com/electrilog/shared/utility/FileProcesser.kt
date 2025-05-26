@@ -1,6 +1,5 @@
 package ch.com.electrilog.shared.utility
 
-import ValidatedMeteredData
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import java.io.File
@@ -12,9 +11,9 @@ class FileProcesser {
 		configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 	}
 
-	fun processXMLFile(filePath: File): ValidatedMeteredData? {
+	fun <T> processXMLFile(file: File, entity: Class<T>): T? {
 		return try {
-			xmlMapper.readValue(filePath, ValidatedMeteredData::class.java)
+			xmlMapper.readValue(file, entity)
 		} catch (e: Exception) {
 			e.printStackTrace()
 			null
