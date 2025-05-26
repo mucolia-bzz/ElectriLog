@@ -25,13 +25,13 @@ data class Header(
 )
 
 data class Meter(
-	@JacksonXmlProperty(localName = "factoryNo", isAttribute = true)
+	@field:JacksonXmlProperty(localName = "factoryNo", isAttribute = true)
 	val factoryNo: String? = null,
 
-	@JacksonXmlProperty(localName = "internalNo", isAttribute = true)
+	@field:JacksonXmlProperty(localName = "internalNo", isAttribute = true)
 	val internalNo: String? = null,
 
-	@JacksonXmlProperty(localName = "TimePeriod")
+	@field:JacksonXmlProperty(localName = "TimePeriod")
 	val timePeriod: TimePeriod? = null,
 )
 
