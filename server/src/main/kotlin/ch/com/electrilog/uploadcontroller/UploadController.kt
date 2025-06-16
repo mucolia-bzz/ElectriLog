@@ -1,4 +1,4 @@
-package ch.com.electrilog.readcontroller
+package ch.com.electrilog.uploadcontroller
 
 import EslEntity
 import SdatEntity
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-class ReadController {
+class UploadController {
 	@Autowired
 	lateinit var fileProcesser: FileProcesser
 
@@ -29,7 +29,7 @@ class ReadController {
 	val meterData = mutableMapOf<String, TreeMap<Long, Messwert>>() // sensorId -> (timestamp -> Messwert)
 
 	@PostMapping(
-		"/read/sdat",
+		"/upload/sdat",
 		produces = [MediaType.APPLICATION_JSON_VALUE],
 		consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
 	)
@@ -65,7 +65,7 @@ class ReadController {
 					val timestamp = parseTimestamp(startDateTime)
 					val volume = observation.volume ?: return@forEach
 
-					// Store data (overwrite if duplicate timestamp)
+					// Store data as Messwert object (overwrite if duplicate timestamp)
 					sensorData[timestamp] = Messwert(timestamp, volume, MesswertType.RELATIV)
 				}
 			}
@@ -75,7 +75,7 @@ class ReadController {
 	}
 
 	@PostMapping(
-		"/read/esl",
+		"/upload/esl",
 		produces = [MediaType.APPLICATION_JSON_VALUE],
 		consumes = [MediaType.MULTIPART_FORM_DATA_VALUE],
 	)
@@ -110,7 +110,7 @@ class ReadController {
 					// Get or create TreeMap for this sensor
 					val sensorData = meterData.getOrPut(sensorId) { TreeMap() }
 
-					// Store data (overwrite if duplicate timestamp)
+					// Store data as Messwert object (overwrite if duplicate timestamp)
 					sensorData[timestamp] = Messwert(timestamp, value, MesswertType.ABSOLUT)
 				}
 			}
@@ -119,7 +119,7 @@ class ReadController {
 		return ResponseEntity.ok("Processed ${uniqueResults.size} ESL files successfully")
 	}
 
-	@GetMapping("/calculate/read-consumption-to-meter")
+	@GetMapping("/calculate/upload-consumption-to-meter")
 	fun calculateConsumptionToMeter(@RequestParam(required = false) sensorId: String?): ResponseEntity<String> {
 		// If sensorId is provided, only calculate for that sensor
 		val sensorsToProcess = sensorId?.let { listOf(it) } ?: listOf("ID735", "ID742")
@@ -155,10 +155,10 @@ class ReadController {
 		return ResponseEntity.ok("Calculated meter readings from consumption data for ${sensorsToProcess.joinToString(", ")}")
 	}
 
-	@GetMapping("/read/data/consumption/{sensorId}")
+	@GetMapping("/data/consumption/{sensorId}")
 	fun getConsumptionData(@PathVariable sensorId: String): ResponseEntity<Map<String, Any>> {
-		val data = consumptionData[sensorId]?.map { (timestamp, value) ->
-			mapOf("ts" to timestamp.toString(), "value" to value)
+		val data = consumptionData[sensorId]?.map { (timestamp, messwert) ->
+			mapOf("ts" to timestamp.toString(), "value" to messwert.value)
 		} ?: emptyList()
 
 		return ResponseEntity.ok(
@@ -169,10 +169,10 @@ class ReadController {
 		)
 	}
 
-	@GetMapping("/read/data/meter/{sensorId}")
+	@GetMapping("/data/meter/{sensorId}")
 	fun getMeterData(@PathVariable sensorId: String): ResponseEntity<Map<String, Any>> {
-		val data = meterData[sensorId]?.map { (timestamp, value) ->
-			mapOf("ts" to timestamp.toString(), "value" to value)
+		val data = meterData[sensorId]?.map { (timestamp, messwert) ->
+			mapOf("ts" to timestamp.toString(), "value" to messwert.value)
 		} ?: emptyList()
 
 		return ResponseEntity.ok(
