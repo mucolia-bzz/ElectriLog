@@ -1,9 +1,9 @@
-import "./App.css";
-import { Consumption } from "./views/Consumption";
-import { Dashboard } from "./views/Dashboard";
-import { Export } from "./views/Export";
-import { Header } from "./views/Header";
-import { Upload } from "./views/Upload";
+import './App.css';
+import { Consumption } from './views/Consumption';
+import { Dashboard } from './views/Dashboard';
+import { Export } from './views/Export';
+import { Header } from './views/Header';
+import { Upload } from './views/Upload';
 
 function App() {
   return (
