@@ -3,56 +3,57 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 
 data class EslEntity(
 	@JacksonXmlProperty(localName = "Header")
-	val header: Header,
+	val header: Header? = null,
 
+	@JacksonXmlElementWrapper(useWrapping = false)
 	@JacksonXmlProperty(localName = "Meter")
-	val meter: Meter,
+	val meters: List<Meter>? = null,
 )
 
 data class Header(
-	@JacksonXmlProperty(isAttribute = true, localName = "version")
-	val version: String,
+	@JacksonXmlProperty(localName = "version", isAttribute = true)
+	val version: String? = null,
 
-	@JacksonXmlProperty(isAttribute = true, localName = "created")
-	val created: String,
+	@JacksonXmlProperty(localName = "created", isAttribute = true)
+	val created: String? = null,
 
-	@JacksonXmlProperty(isAttribute = true, localName = "swSystemNameFrom")
-	val swSystemNameFrom: String,
+	@JacksonXmlProperty(localName = "swSystemNameFrom", isAttribute = true)
+	val swSystemNameFrom: String? = null,
 
-	@JacksonXmlProperty(isAttribute = true, localName = "swSystemNameTo")
-	val swSystemNameTo: String,
+	@JacksonXmlProperty(localName = "swSystemNameTo", isAttribute = true)
+	val swSystemNameTo: String? = null,
 )
 
 data class Meter(
-	@JacksonXmlProperty(isAttribute = true, localName = "factoryNo")
-	val factoryNo: String,
+	@field:JacksonXmlProperty(localName = "factoryNo", isAttribute = true)
+	val factoryNo: String? = null,
 
-	@JacksonXmlProperty(isAttribute = true, localName = "internalNo")
-	val internalNo: String,
+	@field:JacksonXmlProperty(localName = "internalNo", isAttribute = true)
+	val internalNo: String? = null,
 
-	@JacksonXmlProperty(localName = "TimePeriod")
-	val timePeriod: TimePeriod,
+	@field:JacksonXmlProperty(localName = "TimePeriod")
+	val timePeriod: TimePeriod? = null,
 )
 
 data class TimePeriod(
-	@JacksonXmlProperty(isAttribute = true, localName = "end")
-	val end: String,
+	@JacksonXmlProperty(isAttribute = true)
+	val end: String? = null, // Maps the "end" attribute
 
 	@JacksonXmlElementWrapper(useWrapping = false)
 	@JacksonXmlProperty(localName = "ValueRow")
-	val valueRows: List<ValueRow>,
+	val valueRows: List<ValueRow>? = null, // Maps the nested "ValueRow" elements
 )
 
 data class ValueRow(
-	@JacksonXmlProperty(isAttribute = true, localName = "obis")
-	val obis: String,
+	@JacksonXmlProperty(localName = "obis", isAttribute = true)
+	val obis: String? = null,
 
-	@JacksonXmlProperty(isAttribute = true, localName = "valueTimeStamp")
+	@JacksonXmlProperty(localName = "valueTimeStamp", isAttribute = true)
 	val valueTimeStamp: String? = null,
 
-	@JacksonXmlProperty(isAttribute = true, localName = "value")
-	val value: String,
+	@JacksonXmlProperty(localName = "value", isAttribute = true)
+	val value: String? = null,
 
-	@JacksonXmlProperty(isAttribute = true, localName = "status")
-	val status: String,
+	@JacksonXmlProperty(localName = "status", isAttribute = true)
+	val status: String? = null,
 )
