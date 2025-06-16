@@ -6,31 +6,45 @@ export const Dashboard: React.FC<{
   currentUsage: number;
 }> = ({ readingToday, currentUsage }) => {
   return (
-    <section className="p-6 bg-white rounded-lg shadow mt-6">
-      <h2 className="text-2xl font-semibold mb-6">Dashboard</h2>
+    <section className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow mt-6">
+      <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
+        Dashboard
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
+        <Card className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="text-base">Zählerstand heute</CardTitle>
+            <CardTitle className="text-base text-gray-700 dark:text-gray-300 text-center">
+              Zählerstand heute
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{readingToday} kWh</div>
+            <div className="text-3xl font-bold text-gray-900 dark:text-white text-center">
+              {readingToday} kWh
+            </div>
           </CardContent>
         </Card>
-        <Card>
+
+        <Card className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="text-base">Aktueller Verbrauch</CardTitle>
+            <CardTitle className="text-base text-gray-700 dark:text-gray-300 text-center">
+              Aktueller Verbrauch
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{currentUsage} kWh</div>
+            <div className="text-3xl font-bold text-gray-900 dark:text-white text-center">
+              {currentUsage} kWh
+            </div>
           </CardContent>
         </Card>
-        <Card>
+
+        <Card className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
           <CardHeader>
-            <CardTitle className="text-base">Einspeisung vs. Bezug</CardTitle>
+            <CardTitle className="text-base text-gray-700 dark:text-gray-300 text-center">
+              Einspeisung vs. Bezug
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-40 bg-green-100 flex items-center justify-center text-green-600 font-medium">
+            <div className="h-40 bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 font-medium">
               Diagramm
             </div>
           </CardContent>

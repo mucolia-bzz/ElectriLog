@@ -49,8 +49,10 @@ export const Upload: React.FC = () => {
     };
 
   return (
-    <section className="bg-white rounded-lg shadow p-6 mt-6 space-y-6">
-      <h2 className="text-2xl font-semibold">Daten hochladen</h2>
+    <section className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mt-6 space-y-6">
+      <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+        Daten hochladen
+      </h2>
 
       {/* ESL Upload */}
       <div className="space-y-2">
@@ -62,14 +64,20 @@ export const Upload: React.FC = () => {
           className="hidden"
           onChange={onChange(uploadEsl)}
         />
-        <Button onClick={pickEsl} disabled={eslUploading}>
+        <Button
+          className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600"
+          onClick={pickEsl}
+          disabled={eslUploading}
+        >
           {eslUploading ? 'Lade ESL hoch…' : 'ESL-Dateien hochladen'}
         </Button>
         {eslHasError && (
-          <div className="text-red-600">Error: {eslError?.message}</div>
+          <div className="text-red-600 dark:text-red-400">
+            Error: {eslError?.message}
+          </div>
         )}
         {eslSucceeded && eslData && (
-          <pre className="bg-gray-100 p-3 rounded overflow-auto text-sm">
+          <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded overflow-auto text-sm text-gray-900 dark:text-gray-100">
             {JSON.stringify(eslData as Esl[], null, 2)}
           </pre>
         )}
@@ -85,14 +93,20 @@ export const Upload: React.FC = () => {
           className="hidden"
           onChange={onChange(uploadSdat)}
         />
-        <Button onClick={pickSdat} disabled={sdatUploading}>
+        <Button
+          className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600"
+          onClick={pickSdat}
+          disabled={sdatUploading}
+        >
           {sdatUploading ? 'Lade SDAT hoch…' : 'SDAT-Dateien hochladen'}
         </Button>
         {sdatHasError && (
-          <div className="text-red-600">Error: {sdatError?.message}</div>
+          <div className="text-red-600 dark:text-red-400">
+            Error: {sdatError?.message}
+          </div>
         )}
         {sdatSucceeded && sdatData && (
-          <pre className="bg-gray-100 p-3 rounded overflow-auto text-sm">
+          <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded overflow-auto text-sm text-gray-900 dark:text-gray-100">
             {JSON.stringify(sdatData as Sdat[], null, 2)}
           </pre>
         )}
