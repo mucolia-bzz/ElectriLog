@@ -1,218 +1,180 @@
-# ElectriLog Server API Documentation
+# ElectriLog Server
 
-This document provides information about the API endpoints available in the ElectriLog server application.
+## Architekturübersicht
 
-## Table of Contents
-- [Overview](#overview)
-- [Data Upload Endpoints](#data-upload-endpoints)
-- [Data Retrieval Endpoints](#data-retrieval-endpoints)
-- [Data Export Endpoints](#data-export-endpoints)
-- [Calculation Endpoints](#calculation-endpoints)
+ElectriLog ist eine Client-Server-Anwendung, die entwickelt wurde, um Stromzählerdaten aus SDAT- und ESL-Dateien zu verarbeiten und zu analysieren. Die Server-Komponente ist mit Spring Boot und Kotlin erstellt und bietet eine RESTful API für Datenverarbeitung, -speicherung und -abruf.
 
-## Overview
+### Systemarchitektur
 
-ElectriLog is a system for processing and analyzing electricity meter data. The server provides APIs for:
-- Uploading and processing electricity meter data in different formats (SDAT, ESL)
-- Retrieving processed data
-- Exporting data in different formats (JSON, CSV)
-- Performing calculations on the data
+Das System folgt einem Schichtenarchitekturmuster:
 
-## Data Upload Endpoints
+1. **Controller-Schicht**: Verarbeitet HTTP-Anfragen und -Antworten
+2. **Service-Schicht**: Enthält Geschäftslogik und Datenverarbeitung
+3. **Modell-Schicht**: Definiert Datenstrukturen und Entitäten
+4. **Utility-Schicht**: Stellt Hilfsfunktionen und Werkzeuge bereit
 
-### Upload SDAT Files
+### Komponenten
+
+#### Controller
+
+- **DataController**: Verarbeitet Daten-Upload, -Verarbeitung und -Abrufoperationen
+- **ExportController**: Verwaltet den Datenexport in verschiedenen Formaten (JSON, CSV)
+
+#### Services
+
+- **MeterDataService**: Kernservice für die Verarbeitung von Zählerdaten, Handhabung von SDAT- und ESL-Dateien und Durchführung von Berechnungen
+
+#### Modelle
+
+- **Messwert**: Repräsentiert einen Messwert mit Zeitstempel, Wert und Typ
+- **MesswertType**: Enum für Messwerttypen (ABSOLUT, RELATIV)
+
+#### Entitäten
+
+- **SdatEntity**: Repräsentiert die Struktur von SDAT-XML-Dateien
+- **EslEntity**: Repräsentiert die Struktur von ESL-XML-Dateien
+
+#### Utilities
+
+- **FileProcesser**: Verarbeitet XML-Datei-Parsing und -Verarbeitung
+
+### Datenfluss
+
+1. **Daten-Upload**:
+   - Client lädt SDAT- oder ESL-Dateien über den DataController hoch
+   - Dateien werden vom MeterDataService verarbeitet
+   - Geparste Daten werden im Speicher gespeichert (in einer Produktionsumgebung wäre dies eine Datenbank)
+
+2. **Datenverarbeitung**:
+   - SDAT-Dateien liefern Verbrauchsdaten (relative Werte)
+   - ESL-Dateien liefern Zählerstände (absolute Werte)
+   - Das System kann Zählerstände aus Verbrauchsdaten berechnen
+
+3. **Datenabruf und -export**:
+   - Verarbeitete Daten können über API-Endpunkte abgerufen werden
+   - Daten können im JSON- oder CSV-Format exportiert werden
+
+## API-Dokumentation
+
+### Daten-Upload-Endpunkte
+
+#### SDAT-Dateien hochladen
 
 ```
-POST /upload/sdat
+POST /data/upload/sdat
 ```
 
-Uploads and processes SDAT files (XML format).
+Lädt SDAT-Dateien hoch und verarbeitet sie (XML-Format).
 
-**Request:**
+**Anfrage:**
 - Content-Type: multipart/form-data
-- Body: file[] (multiple files allowed)
+- Body: file[] (mehrere Dateien erlaubt)
 
-**Response:**
+**Antwort:**
 - Content-Type: application/json
-- Body: Success message with number of processed files
+- Body: Erfolgsmeldung mit Anzahl der verarbeiteten Dateien
 
-### Upload ESL Files
+#### ESL-Dateien hochladen
 
 ```
-POST /upload/esl
+POST /data/upload/esl
 ```
 
-Uploads and processes ESL files (XML format).
+Lädt ESL-Dateien hoch und verarbeitet sie (XML-Format).
 
-**Request:**
+**Anfrage:**
 - Content-Type: multipart/form-data
-- Body: file[] (multiple files allowed)
+- Body: file[] (mehrere Dateien erlaubt)
 
-**Response:**
+**Antwort:**
 - Content-Type: application/json
-- Body: Success message with number of processed files
+- Body: Erfolgsmeldung mit Anzahl der verarbeiteten Dateien
 
-### Read SDAT Files
+### Datenabruf-Endpunkte
 
-```
-POST /read/sdat
-```
-
-Alternative endpoint for uploading and processing SDAT files.
-
-**Request:**
-- Content-Type: multipart/form-data
-- Body: file[] (multiple files allowed)
-
-**Response:**
-- Content-Type: application/json
-- Body: Success message with number of processed files
-
-### Read ESL Files
-
-```
-POST /read/esl
-```
-
-Alternative endpoint for uploading and processing ESL files.
-
-**Request:**
-- Content-Type: multipart/form-data
-- Body: file[] (multiple files allowed)
-
-**Response:**
-- Content-Type: application/json
-- Body: Success message with number of processed files
-
-## Data Retrieval Endpoints
-
-### Get Consumption Data
+#### Verbrauchsdaten abrufen
 
 ```
 GET /data/consumption/{sensorId}
 ```
 
-Retrieves consumption data for a specific sensor.
+Ruft Verbrauchsdaten für einen bestimmten Sensor ab.
 
-**Parameters:**
-- sensorId (path): ID of the sensor (e.g., "ID735" for Einspeisung, "ID742" for Bezug)
+**Parameter:**
+- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
-**Response:**
+**Antwort:**
 - Content-Type: application/json
-- Body: JSON object with sensorId and data array
+- Body: JSON-Objekt mit sensorId und Daten-Array
 
-### Get Meter Data
+#### Zählerdaten abrufen
 
 ```
 GET /data/meter/{sensorId}
 ```
 
-Retrieves meter data for a specific sensor.
+Ruft Zählerdaten für einen bestimmten Sensor ab.
 
-**Parameters:**
-- sensorId (path): ID of the sensor (e.g., "ID735" for Einspeisung, "ID742" for Bezug)
+**Parameter:**
+- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
-**Response:**
+**Antwort:**
 - Content-Type: application/json
-- Body: JSON object with sensorId and data array
+- Body: JSON-Objekt mit sensorId und Daten-Array
 
-### Get Consumption Data (Alternative)
+### Datenexport-Endpunkte
 
-```
-GET /read/data/consumption/{sensorId}
-```
-
-Alternative endpoint for retrieving consumption data.
-
-**Parameters:**
-- sensorId (path): ID of the sensor (e.g., "ID735" for Einspeisung, "ID742" for Bezug)
-
-**Response:**
-- Content-Type: application/json
-- Body: JSON object with sensorId and data array
-
-### Get Meter Data (Alternative)
-
-```
-GET /read/data/meter/{sensorId}
-```
-
-Alternative endpoint for retrieving meter data.
-
-**Parameters:**
-- sensorId (path): ID of the sensor (e.g., "ID735" for Einspeisung, "ID742" for Bezug)
-
-**Response:**
-- Content-Type: application/json
-- Body: JSON object with sensorId and data array
-
-## Data Export Endpoints
-
-### Export Data as JSON
+#### Daten als JSON exportieren
 
 ```
 GET /export/json/{sensorId}
 ```
 
-Exports sensor data in JSON format.
+Exportiert Sensordaten im JSON-Format.
 
-**Parameters:**
-- sensorId (path): ID of the sensor (e.g., "ID735" for Einspeisung, "ID742" for Bezug)
+**Parameter:**
+- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
-**Response:**
+**Antwort:**
 - Content-Type: application/json
-- Body: JSON array containing sensor data
+- Body: JSON-Array mit Sensordaten
 
-### Export Data as CSV
+#### Daten als CSV exportieren
 
 ```
 GET /export/csv/{sensorId}
 ```
 
-Exports sensor data in CSV format.
+Exportiert Sensordaten im CSV-Format.
 
-**Parameters:**
-- sensorId (path): ID of the sensor (e.g., "ID735" for Einspeisung, "ID742" for Bezug)
+**Parameter:**
+- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
-**Response:**
+**Antwort:**
 - Content-Type: text/csv
-- Body: CSV data with timestamp and value columns
+- Body: CSV-Daten mit Zeitstempel- und Wertespalten
 - Headers: Content-Disposition: attachment; filename="{sensorId}.csv"
 
-## Calculation Endpoints
+### Berechnungs-Endpunkte
 
-### Calculate Meter Readings from Consumption Data
+#### Zählerstände aus Verbrauchsdaten berechnen
 
 ```
-GET /calculate/upload-consumption-to-meter
+GET /data/calculate
 ```
 
-Calculates meter readings from consumption data.
+Berechnet Zählerstände aus Verbrauchsdaten.
 
-**Parameters:**
-- sensorId (query, optional): ID of the sensor to calculate for. If not provided, calculates for all sensors.
+**Parameter:**
+- sensorId (Abfrage, optional): ID des Sensors, für den berechnet werden soll. Wenn nicht angegeben, wird für alle Sensoren berechnet.
 
-**Response:**
+**Antwort:**
 - Content-Type: application/json
-- Body: Success message with list of processed sensors
+- Body: Erfolgsmeldung mit Liste der verarbeiteten Sensoren
 
-### Calculate Meter Readings from Consumption Data (Alternative)
+## Datenformat
 
-```
-GET /calculate/read-consumption-to-meter
-```
-
-Alternative endpoint for calculating meter readings from consumption data.
-
-**Parameters:**
-- sensorId (query, optional): ID of the sensor to calculate for. If not provided, calculates for all sensors.
-
-**Response:**
-- Content-Type: application/json
-- Body: Success message with list of processed sensors
-
-## Data Format
-
-### Sensor Data Response Format
+### Sensordaten-Antwortformat
 
 ```json
 {
@@ -230,5 +192,12 @@ Alternative endpoint for calculating meter readings from consumption data.
 }
 ```
 
-- ts: Unix timestamp (seconds since epoch)
-- value: Meter reading or consumption value
+- ts: Unix-Zeitstempel (Sekunden seit Epoche)
+- value: Zählerstand oder Verbrauchswert
+
+## Verwendete Technologien
+
+- **Spring Boot**: Web-Framework zum Erstellen der REST-API
+- **Kotlin**: Programmiersprache
+- **Jackson**: JSON- und XML-Verarbeitung
+- **JUnit**: Test-Framework

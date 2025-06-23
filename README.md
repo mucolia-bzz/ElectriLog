@@ -1,71 +1,100 @@
 # ElectriLog
 
-ElectriLog is a system for processing and analyzing electricity meter data. It consists of a client and server component.
+ElectriLog ist ein System zur Verarbeitung und Analyse von Stromzählerdaten. Es besteht aus einer Client- und einer Server-Komponente.
 
-## Project Structure
+## Architekturübersicht
 
-- **client/** - Frontend application
-- **server/** - Backend API server
+ElectriLog folgt einer Client-Server-Architektur:
 
-## Server API
+- **Client**: Eine mit React, TypeScript und Vite erstellte Webanwendung, die eine Benutzeroberfläche zum Hochladen von Dateien, Visualisieren von Daten und Exportieren von Ergebnissen bietet.
+- **Server**: Eine in Kotlin geschriebene Spring Boot-Anwendung, die Stromzählerdaten verarbeitet, Berechnungen durchführt und eine RESTful API bereitstellt.
 
-The server provides a REST API for uploading, processing, retrieving, and exporting electricity meter data.
+### Systemarchitektur
 
-For detailed API documentation, see the [Server API Documentation](server/README.md).
+Das System ist in folgende Schichten organisiert:
 
-## Features
+1. **Präsentationsschicht** (Client)
+   - Benutzeroberfläche für Datei-Upload, Datenvisualisierung und Export
 
-- Upload and process electricity meter data in different formats (SDAT, ESL)
-- Retrieve processed data
-- Export data in different formats (JSON, CSV)
-- Perform calculations on the data
+2. **API-Schicht** (Server)
+   - RESTful-Endpunkte für Datenverarbeitung, -abruf und -export
 
-## Getting Started
+3. **Serviceschicht** (Server)
+   - Geschäftslogik zur Verarbeitung von Zählerdaten
+   - Berechnung von Zählerständen aus Verbrauchsdaten
+
+4. **Datenschicht** (Server)
+   - In-Memory-Speicherung verarbeiteter Daten (könnte auf eine Datenbank erweitert werden)
+   - Datenmodelle und Entitäten
+
+## Projektstruktur
+
+- **client/** - Frontend-Anwendung
+- **server/** - Backend-API-Server
+
+## Funktionen
+
+- Hochladen und Verarbeiten von Stromzählerdaten in verschiedenen Formaten (SDAT, ESL)
+- Abrufen verarbeiteter Daten
+- Exportieren von Daten in verschiedenen Formaten (JSON, CSV)
+- Durchführen von Berechnungen mit den Daten
+- Visualisieren von Daten in Diagrammen und Grafiken
+
+## Erste Schritte
 
 ### Server
 
-The server is a Spring Boot application written in Kotlin. To run the server:
+Der Server ist eine in Kotlin geschriebene Spring Boot-Anwendung. Um den Server zu starten:
 
-1. Navigate to the server directory: `cd server`
-2. Build the application: `./gradlew build`
-3. Run the application: `./gradlew bootRun`
+1. Navigieren Sie zum Server-Verzeichnis: `cd server`
+2. Bauen Sie die Anwendung: `./gradlew build`
+3. Starten Sie die Anwendung: `./gradlew bootRun`
 
-The server will start on port 8080 by default.
+Der Server startet standardmäßig auf Port 8080.
 
 ### Client
 
-The client is a web application. To run the client:
+Der Client ist eine mit React, TypeScript und Vite erstellte Webanwendung. Um den Client zu starten:
 
-1. Navigate to the client directory: `cd client`
-2. Install dependencies: `npm install`
-3. Start the development server: `npm run dev`
+1. Navigieren Sie zum Client-Verzeichnis: `cd client`
+2. Installieren Sie die Abhängigkeiten: `npm install`
+3. Starten Sie den Entwicklungsserver: `npm run dev`
 
-The client will be available at http://localhost:3000 by default.
+Der Client ist standardmäßig unter http://localhost:3000 verfügbar.
 
-## API Endpoints Overview
+## API-Endpunkte Übersicht
 
-### Data Upload
+### Daten-Upload
 
-- `POST /upload/sdat` - Upload SDAT files
-- `POST /upload/esl` - Upload ESL files
-- `POST /read/sdat` - Alternative endpoint for uploading SDAT files
-- `POST /read/esl` - Alternative endpoint for uploading ESL files
+- `POST /data/upload/sdat` - SDAT-Dateien hochladen
+- `POST /data/upload/esl` - ESL-Dateien hochladen
 
-### Data Retrieval
+### Datenabruf
 
-- `GET /data/consumption/{sensorId}` - Get consumption data
-- `GET /data/meter/{sensorId}` - Get meter data
-- `GET /read/data/consumption/{sensorId}` - Alternative endpoint for getting consumption data
-- `GET /read/data/meter/{sensorId}` - Alternative endpoint for getting meter data
+- `GET /data/consumption/{sensorId}` - Verbrauchsdaten abrufen
+- `GET /data/meter/{sensorId}` - Zählerstandsdaten abrufen
 
-### Data Export
+### Datenexport
 
-- `GET /export/json/{sensorId}` - Export data as JSON
-- `GET /export/csv/{sensorId}` - Export data as CSV
+- `GET /export/json/{sensorId}` - Daten als JSON exportieren
+- `GET /export/csv/{sensorId}` - Daten als CSV exportieren
 
-### Calculations
+### Berechnungen
 
-- `GET /calculate/upload-consumption-to-meter` - Calculate meter readings from consumption data
-- `GET /calculate/read-consumption-to-meter` - Alternative endpoint for calculating meter readings
+- `GET /data/calculate` - Zählerstände aus Verbrauchsdaten berechnen
 
-For more details, see the [Server API Documentation](server/README.md).
+Weitere Details finden Sie in der [Server-API-Dokumentation](server/README.md).
+
+## Verwendete Technologien
+
+### Server
+- Spring Boot
+- Kotlin
+- Jackson (JSON/XML-Verarbeitung)
+- JUnit (Testing)
+
+### Client
+- React
+- TypeScript
+- Vite
+- CSS Modules

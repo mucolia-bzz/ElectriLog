@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7d26befe-adf9-4980-9d96-5d940e1bb432" name="Changes" comment="added readme">
+      <change afterPath="$PROJECT_DIR$/server/aufgabe.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/server/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/exportcontroller/ExportController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/exportcontroller/ExportController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/readcontroller/ReadController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/shared/entity/EslEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/shared/entity/EslEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/shared/entity/SdatEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/shared/entity/SdatEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/kotlin/ch/com/electrilog/uploadcontroller/UploadController.kt" beforeDir="false" />
+    </list>
+    <list id="305e866b-6c41-4e2e-94b2-2184254f9e89" name="do not commit" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/server">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/server">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ElectriLog" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ElectriLog" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ElectriLog" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="Kotlin Data Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main-view" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;savicg-bzz&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1750072126" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main-view" />
+                    <option name="lastUsedInstant" value="1750065552" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="export" />
+                    <option name="lastUsedInstant" value="1748324908" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mucolia-bzz/ElectriLog.git&quot;,
+    &quot;accountId&quot;: &quot;fc4e8a85-eff9-484f-8a2c-37b16f456371&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2wxTn0tmWn6DtU3m35nJ8Go4MQB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build server.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.server [bootRun].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.ServerApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/Users/a43690219/Development/BZZ/Workspace/ElectriLog",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/a43690219/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/server/src/main/resources" />
+      <recent name="$PROJECT_DIR$/server/src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.server [bootRun]">
+    <configuration name="server [bootRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="env">
+          <map>
+            <entry key="electriLogDriverClassName" value="com.mysql.cj.jdbc.Driver " />
+            <entry key="electriLogUrl" value="jdbc:mysql://localhost:3306/electrilog" />
+            <entry key="electriLogUser" value="electriloguser" />
+            <entry key="electriLogUserPassword" value="ELECTRILOG" />
+          </map>
+        </option>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/server" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootRun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="server [bootTestRun]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/server" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootTestRun" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="ServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ch.com.ElectriLog.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ch.com.electrilog.ServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26094.121" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-IU-251.26094.121" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="StructureViewState">
+    <option name="selectedTab" value="Logical" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7d26befe-adf9-4980-9d96-5d940e1bb432" name="Changes" comment="" />
+      <changelist id="305e866b-6c41-4e2e-94b2-2184254f9e89" name="do not commit" comment="" />
+      <created>1746982387832</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1746982387832</updated>
+      <workItem from="1746982388912" duration="10466000" />
+      <workItem from="1747640789344" duration="2398000" />
+      <workItem from="1748242830247" duration="8460000" />
+      <workItem from="1748260176016" duration="2232000" />
+      <workItem from="1748262784086" duration="7872000" />
+      <workItem from="1750057515514" duration="9130000" />
+      <workItem from="1750662168098" duration="27000" />
+    </task>
+    <task id="LOCAL-00001" summary="add .editorconfig for ktlint (linting plugin)">
+      <option name="closed" value="true" />
+      <created>1746982850131</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1746982850131</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add parsing mechanism">
+      <option name="closed" value="true" />
+      <created>1748243924560</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1748243924561</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add mutli-file upload support">
+      <option name="closed" value="true" />
+      <created>1748259305726</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1748259305726</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix">
+      <option name="closed" value="true" />
+      <created>1748261834451</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748261834451</updated>
+    </task>
+    <task id="LOCAL-00005" summary="error fix">
+      <option name="closed" value="true" />
+      <created>1748262012574</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748262012574</updated>
+    </task>
+    <task id="LOCAL-00006" summary="push">
+      <option name="closed" value="true" />
+      <created>1750060266204</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1750060266204</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added readme">
+      <option name="closed" value="true" />
+      <created>1750061620656</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750061620656</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add .editorconfig for ktlint (linting plugin)" />
+    <MESSAGE value="add parsing mechanism" />
+    <MESSAGE value="add mutli-file upload support" />
+    <MESSAGE value="fix" />
+    <MESSAGE value="error fix" />
+    <MESSAGE value="push" />
+    <MESSAGE value="added readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="added readme" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

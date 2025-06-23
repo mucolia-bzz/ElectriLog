@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.glassfish.hk2:class-model:3.0.6" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.glassfish.hk2" artifactId="class-model" version="3.0.6" baseVersion="3.0.6" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.hk2/class-model/3.0.6/cdb59ed7b763f2fbee0a5595b2d1bad91d22f27f/class-model-3.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
