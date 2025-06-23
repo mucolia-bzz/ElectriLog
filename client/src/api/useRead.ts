@@ -4,7 +4,7 @@ import type { Esl } from '@/models';
 import type { Sdat } from '@/models';
 
 function useReadFiles<T>(
-  endpoint: '/read/esl' | '/read/sdat'
+  endpoint: '/data/upload/esl' | '/data/upload/sdat'
 ): UseMutationResult<T[], Error, FileList | File[]> {
   return useMutation<T[], Error, FileList | File[]>({
     mutationFn: files => {
@@ -29,7 +29,7 @@ export function useReadEsl(): UseMutationResult<
   Error,
   FileList | File[]
 > {
-  return useReadFiles<Esl>('/read/esl');
+  return useReadFiles<Esl>('/data/upload/esl');
 }
 
 /**
@@ -41,5 +41,5 @@ export function useReadSdat(): UseMutationResult<
   Error,
   FileList | File[]
 > {
-  return useReadFiles<Sdat>('/read/sdat');
+  return useReadFiles<Sdat>('/data/upload/sdat');
 }

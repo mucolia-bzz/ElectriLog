@@ -1,4 +1,3 @@
-// src/data/testData.ts
 // Sample test data for charts (Einspeisung vs Bezug, consumption, and meter readings)
 
 export interface DataPoint {

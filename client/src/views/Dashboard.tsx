@@ -1,4 +1,3 @@
-// src/components/Dashboard.tsx
 import React, { useMemo } from 'react';
 import {
   LineChart,
@@ -17,9 +16,16 @@ const FEED_IN_ID = 'ID735';
 const DRAW_ID = 'ID742';
 
 export const Dashboard: React.FC = () => {
-  const { data: feedResponse, isLoading: feedLoading } =
-    useMeterData(FEED_IN_ID);
-  const { data: drawResponse, isLoading: drawLoading } = useMeterData(DRAW_ID);
+  const {
+    data: feedResponse,
+    isLoading: feedLoading,
+    error: feedError,
+  } = useMeterData(FEED_IN_ID);
+  const {
+    data: drawResponse,
+    isLoading: drawLoading,
+    error: drawError,
+  } = useMeterData(DRAW_ID);
 
   // Derive metrics
   const readingToday = useMemo(() => {
@@ -36,35 +42,38 @@ export const Dashboard: React.FC = () => {
       : 0;
   }, [drawResponse]);
 
-  // Merge by timestamp for chart
+  // Merge by timestamp for chart (numeric date)
   const chartData = useMemo(() => {
     if (!feedResponse?.data || !drawResponse?.data) return [];
     const map: Record<
       number,
-      { date: Date; einspeisung: number; bezug: number }
+      { date: number; einspeisung: number; bezug: number }
     > = {};
 
     feedResponse.data.forEach(({ ts, value }) => {
-      const t = +ts * 1000;
-      map[t] = map[t] || { date: new Date(t), einspeisung: 0, bezug: 0 };
+      const t = Number(ts) * 1000;
+      if (!map[t]) map[t] = { date: t, einspeisung: 0, bezug: 0 };
       map[t].einspeisung = value;
     });
     drawResponse.data.forEach(({ ts, value }) => {
-      const t = +ts * 1000;
-      map[t] = map[t] || { date: new Date(t), einspeisung: 0, bezug: 0 };
+      const t = Number(ts) * 1000;
+      if (!map[t]) map[t] = { date: t, einspeisung: 0, bezug: 0 };
       map[t].bezug = value;
     });
 
-    return Object.values(map).sort(
-      (a, b) => a.date.getTime() - b.date.getTime()
-    );
+    return Object.values(map).sort((a, b) => a.date - b.date);
   }, [feedResponse, drawResponse]);
 
-  const formatDate = (date: Date) =>
-    date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  const formatDate = (ts: number) =>
+    new Date(ts).toLocaleDateString(undefined, {
+      month: 'short',
+      day: 'numeric',
+    });
 
   if (feedLoading || drawLoading)
     return <div className="p-6">Loading dashboard…</div>;
+  if (feedError || drawError)
+    return <div className="text-red-600 p-6">Error loading data.</div>;
 
   return (
     <section className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow mt-6">
@@ -105,36 +114,46 @@ export const Dashboard: React.FC = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={chartData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis
-                  dataKey="date"
-                  type="number"
-                  scale="time"
-                  domain={['dataMin', 'dataMax']}
-                  tickFormatter={formatDate}
-                  tickCount={chartData.length}
-                />
-                <YAxis />
-                <Tooltip
-                  labelFormatter={v => new Date(v as number).toLocaleString()}
-                />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="einspeisung"
-                  name="Einspeisung"
-                  unit=" kWh"
-                />
-                <Line
-                  type="monotone"
-                  dataKey="bezug"
-                  name="Bezug"
-                  unit=" kWh"
-                />
-              </LineChart>
-            </ResponsiveContainer>
+            {chartData.length > 0 ? (
+              <ResponsiveContainer width="100%" height={200}>
+                <LineChart data={chartData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="date"
+                    type="number"
+                    scale="time"
+                    domain={['dataMin', 'dataMax']}
+                    tickFormatter={formatDate}
+                    tickCount={chartData.length}
+                  />
+                  <YAxis />
+                  <Tooltip
+                    labelFormatter={value =>
+                      new Date(Number(value)).toLocaleString()
+                    }
+                  />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="einspeisung"
+                    name="Einspeisung"
+                    stroke="#10B981"
+                    dot={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="bezug"
+                    name="Bezug"
+                    stroke="#EF4444"
+                    dot={false}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="text-center text-gray-500 dark:text-gray-400 py-10">
+                Keine Diagrammdaten verfügbar.
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
