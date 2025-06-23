@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.glassfish.expressly:expressly:5.0.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.glassfish.expressly" artifactId="expressly" version="5.0.0" baseVersion="5.0.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.glassfish.expressly/expressly/5.0.0/78637fec7db6414c3ad32f3aa9e5d6610a299e5b/expressly-5.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

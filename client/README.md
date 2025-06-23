@@ -1,54 +1,91 @@
-# React + TypeScript + Vite
+# ElectriLog Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dies ist die Client-Komponente des ElectriLog-Systems, eine Webanwendung zur Verarbeitung und Analyse von Stromzählerdaten.
 
-Currently, two official plugins are available:
+## Übersicht
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Der ElectriLog-Client ist eine moderne Webanwendung, die mit React, TypeScript und Vite entwickelt wurde. Sie bietet eine Benutzeroberfläche für:
 
-## Expanding the ESLint configuration
+- Hochladen von Stromzählerdaten (SDAT, ESL)
+- Visualisieren von verarbeiteten Daten
+- Exportieren von Daten in verschiedenen Formaten
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Projektstruktur
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+client/
+├── public/             # Statische Assets
+├── src/                # Quellcode
+│   ├── assets/         # Bilder, Fonts und andere Assets
+│   ├── components/     # Wiederverwendbare UI-Komponenten
+│   │   └── ui/         # Basis-UI-Komponenten
+│   ├── lib/            # Hilfsfunktionen und Utilities
+│   ├── App.tsx         # Hauptkomponente der Anwendung
+│   └── main.tsx        # Einstiegspunkt der Anwendung
+└── ...                 # Konfigurationsdateien
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Technologien
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React**: JavaScript-Bibliothek für Benutzeroberflächen
+- **TypeScript**: Typsicheres JavaScript
+- **Vite**: Build-Tool und Entwicklungsserver
+- **Tailwind CSS**: Utility-First CSS-Framework
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Erste Schritte
+
+### Voraussetzungen
+
+- Node.js (Version 18 oder höher)
+- npm oder yarn
+
+### Installation
+
+1. Klonen Sie das Repository:
+   ```
+   git clone https://github.com/yourusername/ElectriLog.git
+   ```
+
+2. Navigieren Sie zum Client-Verzeichnis:
+   ```
+   cd ElectriLog/client
+   ```
+
+3. Installieren Sie die Abhängigkeiten:
+   ```
+   npm install
+   # oder
+   yarn
+   ```
+
+### Entwicklung
+
+Starten Sie den Entwicklungsserver:
+
 ```
+npm run dev
+# oder
+yarn dev
+```
+
+Die Anwendung ist dann unter http://localhost:5173 verfügbar.
+
+### Build
+
+Erstellen Sie eine Produktionsversion:
+
+```
+npm run build
+# oder
+yarn build
+```
+
+Die Build-Dateien werden im `dist`-Verzeichnis erstellt.
+
+## Verbindung zum Server
+
+Der Client kommuniziert mit dem ElectriLog-Server über RESTful API-Endpunkte. Standardmäßig wird erwartet, dass der Server unter `http://localhost:8080` läuft.
+
+## Weitere Informationen
+
+Weitere Details zur gesamten ElectriLog-Anwendung finden Sie in der [Haupt-README](../README.md) und der [Server-README](../server/README.md).

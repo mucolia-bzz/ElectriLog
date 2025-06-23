@@ -1,3 +1,5 @@
+package ch.com.electrilog.shared.entity
+
 import com.fasterxml.jackson.dataformat.xml.annotation.*
 
 @JacksonXmlRootElement(localName = "ValidatedMeteredData_12", namespace = "http://www.strom.ch")
