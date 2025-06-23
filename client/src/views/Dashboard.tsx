@@ -1,10 +1,71 @@
-import React from 'react';
+// src/components/Dashboard.tsx
+import React, { useMemo } from 'react';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { useMeterData } from '@/api/useMeterData';
 
-export const Dashboard: React.FC<{
-  readingToday: number;
-  currentUsage: number;
-}> = ({ readingToday, currentUsage }) => {
+const FEED_IN_ID = 'ID735';
+const DRAW_ID = 'ID742';
+
+export const Dashboard: React.FC = () => {
+  const { data: feedResponse, isLoading: feedLoading } =
+    useMeterData(FEED_IN_ID);
+  const { data: drawResponse, isLoading: drawLoading } = useMeterData(DRAW_ID);
+
+  // Derive metrics
+  const readingToday = useMemo(() => {
+    const arr = feedResponse?.data;
+    return arr && arr.length > 0 ? arr[arr.length - 1].value : 0;
+  }, [feedResponse]);
+
+  const currentUsage = useMemo(() => {
+    const arr = drawResponse?.data;
+    return arr && arr.length > 1
+      ? Number(
+          (arr[arr.length - 1].value - arr[arr.length - 2].value).toFixed(2)
+        )
+      : 0;
+  }, [drawResponse]);
+
+  // Merge by timestamp for chart
+  const chartData = useMemo(() => {
+    if (!feedResponse?.data || !drawResponse?.data) return [];
+    const map: Record<
+      number,
+      { date: Date; einspeisung: number; bezug: number }
+    > = {};
+
+    feedResponse.data.forEach(({ ts, value }) => {
+      const t = +ts * 1000;
+      map[t] = map[t] || { date: new Date(t), einspeisung: 0, bezug: 0 };
+      map[t].einspeisung = value;
+    });
+    drawResponse.data.forEach(({ ts, value }) => {
+      const t = +ts * 1000;
+      map[t] = map[t] || { date: new Date(t), einspeisung: 0, bezug: 0 };
+      map[t].bezug = value;
+    });
+
+    return Object.values(map).sort(
+      (a, b) => a.date.getTime() - b.date.getTime()
+    );
+  }, [feedResponse, drawResponse]);
+
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+
+  if (feedLoading || drawLoading)
+    return <div className="p-6">Loading dashboard…</div>;
+
   return (
     <section className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow mt-6">
       <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
@@ -37,16 +98,43 @@ export const Dashboard: React.FC<{
           </CardContent>
         </Card>
 
-        <Card className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
+        <Card className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 col-span-full md:col-span-1">
           <CardHeader>
             <CardTitle className="text-base text-gray-700 dark:text-gray-300 text-center">
               Einspeisung vs. Bezug
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-40 bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 font-medium">
-              Diagramm
-            </div>
+            <ResponsiveContainer width="100%" height={200}>
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="date"
+                  type="number"
+                  scale="time"
+                  domain={['dataMin', 'dataMax']}
+                  tickFormatter={formatDate}
+                  tickCount={chartData.length}
+                />
+                <YAxis />
+                <Tooltip
+                  labelFormatter={v => new Date(v as number).toLocaleString()}
+                />
+                <Legend />
+                <Line
+                  type="monotone"
+                  dataKey="einspeisung"
+                  name="Einspeisung"
+                  unit=" kWh"
+                />
+                <Line
+                  type="monotone"
+                  dataKey="bezug"
+                  name="Bezug"
+                  unit=" kWh"
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>

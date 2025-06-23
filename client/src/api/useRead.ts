@@ -22,7 +22,7 @@ function useReadFiles<T>(
 
 /**
  * Hook for reading ESL files:
- * POST /read_esl, returns Esl[]
+ * POST /read/esl, returns Esl[]
  */
 export function useReadEsl(): UseMutationResult<
   Esl[],
@@ -34,7 +34,7 @@ export function useReadEsl(): UseMutationResult<
 
 /**
  * Hook for reading Sdat files:
- * POST /read_sdat, returns sdat[]
+ * POST /read/sdat, returns sdat[]
  */
 export function useReadSdat(): UseMutationResult<
   Sdat[],

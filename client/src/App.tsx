@@ -21,7 +21,7 @@ const App: React.FC = () => {
       <main className="flex-1">
         <div className="container mx-auto px-4 py-6">
           <TabsContent value="dashboard">
-            <Dashboard readingToday={12345.6} currentUsage={1.2} />
+            <Dashboard />
           </TabsContent>
 
           <TabsContent value="upload">

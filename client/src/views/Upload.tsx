@@ -1,7 +1,7 @@
 // src/components/UploadSection.tsx
 import React, { useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { useReadEsl, useReadSdat } from '@/api/hooks';
+import { useReadEsl, useReadSdat } from '@/api/useRead';
 import type { Esl } from '@/models/esl';
 import type { Sdat } from '@/models/sdat';
 
