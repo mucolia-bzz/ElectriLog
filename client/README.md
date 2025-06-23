@@ -1,54 +1,91 @@
-# React + TypeScript + Vite
+# ElectriLog Client
 
-Diese Vorlage bietet eine minimale Einrichtung, um React mit Vite, HMR und einigen ESLint-Regeln zum Laufen zu bringen.
+Dies ist die Client-Komponente des ElectriLog-Systems, eine Webanwendung zur Verarbeitung und Analyse von Stromzählerdaten.
 
-Derzeit sind zwei offizielle Plugins verfügbar:
+## Übersicht
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) verwendet [Babel](https://babeljs.io/) für Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) verwendet [SWC](https://swc.rs/) für Fast Refresh
+Der ElectriLog-Client ist eine moderne Webanwendung, die mit React, TypeScript und Vite entwickelt wurde. Sie bietet eine Benutzeroberfläche für:
 
-## Erweiterung der ESLint-Konfiguration
+- Hochladen von Stromzählerdaten (SDAT, ESL)
+- Visualisieren von verarbeiteten Daten
+- Exportieren von Daten in verschiedenen Formaten
 
-Wenn Sie eine Produktionsanwendung entwickeln, empfehlen wir, die Konfiguration zu aktualisieren, um typbewusste Lint-Regeln zu aktivieren:
+## Projektstruktur
 
-```js
-export default tseslint.config({
-  extends: [
-    // Entfernen Sie ...tseslint.configs.recommended und ersetzen Sie es durch
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternativ können Sie dies für strengere Regeln verwenden
-    ...tseslint.configs.strictTypeChecked,
-    // Optional können Sie dies für stilistische Regeln hinzufügen
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // andere Optionen...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+client/
+├── public/             # Statische Assets
+├── src/                # Quellcode
+│   ├── assets/         # Bilder, Fonts und andere Assets
+│   ├── components/     # Wiederverwendbare UI-Komponenten
+│   │   └── ui/         # Basis-UI-Komponenten
+│   ├── lib/            # Hilfsfunktionen und Utilities
+│   ├── App.tsx         # Hauptkomponente der Anwendung
+│   └── main.tsx        # Einstiegspunkt der Anwendung
+└── ...                 # Konfigurationsdateien
 ```
 
-Sie können auch [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) und [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) für React-spezifische Lint-Regeln installieren:
+## Technologien
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React**: JavaScript-Bibliothek für Benutzeroberflächen
+- **TypeScript**: Typsicheres JavaScript
+- **Vite**: Build-Tool und Entwicklungsserver
+- **Tailwind CSS**: Utility-First CSS-Framework
 
-export default tseslint.config({
-  plugins: {
-    // Fügen Sie die react-x und react-dom Plugins hinzu
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // andere Regeln...
-    // Aktivieren Sie die empfohlenen TypeScript-Regeln
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Erste Schritte
+
+### Voraussetzungen
+
+- Node.js (Version 18 oder höher)
+- npm oder yarn
+
+### Installation
+
+1. Klonen Sie das Repository:
+   ```
+   git clone https://github.com/yourusername/ElectriLog.git
+   ```
+
+2. Navigieren Sie zum Client-Verzeichnis:
+   ```
+   cd ElectriLog/client
+   ```
+
+3. Installieren Sie die Abhängigkeiten:
+   ```
+   npm install
+   # oder
+   yarn
+   ```
+
+### Entwicklung
+
+Starten Sie den Entwicklungsserver:
+
 ```
+npm run dev
+# oder
+yarn dev
+```
+
+Die Anwendung ist dann unter http://localhost:5173 verfügbar.
+
+### Build
+
+Erstellen Sie eine Produktionsversion:
+
+```
+npm run build
+# oder
+yarn build
+```
+
+Die Build-Dateien werden im `dist`-Verzeichnis erstellt.
+
+## Verbindung zum Server
+
+Der Client kommuniziert mit dem ElectriLog-Server über RESTful API-Endpunkte. Standardmäßig wird erwartet, dass der Server unter `http://localhost:8080` läuft.
+
+## Weitere Informationen
+
+Weitere Details zur gesamten ElectriLog-Anwendung finden Sie in der [Haupt-README](../README.md) und der [Server-README](../server/README.md).

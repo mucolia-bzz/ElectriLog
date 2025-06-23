@@ -56,121 +56,191 @@ Das System folgt einem Schichtenarchitekturmuster:
 
 ## API-Dokumentation
 
+Die ElectriLog-API bietet verschiedene Endpunkte zum Hochladen, Abrufen, Berechnen und Exportieren von Stromzählerdaten. Alle Endpunkte sind RESTful und verwenden standardmäßige HTTP-Methoden.
+
 ### Daten-Upload-Endpunkte
 
 #### SDAT-Dateien hochladen
 
-```
+```http
 POST /data/upload/sdat
 ```
 
-Lädt SDAT-Dateien hoch und verarbeitet sie (XML-Format).
+Lädt SDAT-Dateien (XML-Format) hoch und verarbeitet sie. SDAT-Dateien enthalten in der Regel Verbrauchsdaten (relative Werte).
 
 **Anfrage:**
-- Content-Type: multipart/form-data
-- Body: file[] (mehrere Dateien erlaubt)
+- Content-Type: `multipart/form-data`
+- Body: `file[]` (mehrere Dateien erlaubt)
 
 **Antwort:**
-- Content-Type: application/json
+- Status: `200 OK`
+- Content-Type: `application/json`
 - Body: Erfolgsmeldung mit Anzahl der verarbeiteten Dateien
+  ```json
+  "Processed 3 SDAT files successfully"
+  ```
 
 #### ESL-Dateien hochladen
 
-```
+```http
 POST /data/upload/esl
 ```
 
-Lädt ESL-Dateien hoch und verarbeitet sie (XML-Format).
+Lädt ESL-Dateien (XML-Format) hoch und verarbeitet sie. ESL-Dateien enthalten in der Regel Zählerstandsdaten (absolute Werte).
 
 **Anfrage:**
-- Content-Type: multipart/form-data
-- Body: file[] (mehrere Dateien erlaubt)
+- Content-Type: `multipart/form-data`
+- Body: `file[]` (mehrere Dateien erlaubt)
 
 **Antwort:**
-- Content-Type: application/json
+- Status: `200 OK`
+- Content-Type: `application/json`
 - Body: Erfolgsmeldung mit Anzahl der verarbeiteten Dateien
+  ```json
+  "Processed 2 ESL files successfully"
+  ```
 
 ### Datenabruf-Endpunkte
 
 #### Verbrauchsdaten abrufen
 
-```
+```http
 GET /data/consumption/{sensorId}
 ```
 
-Ruft Verbrauchsdaten für einen bestimmten Sensor ab.
+Ruft Verbrauchsdaten (relative Werte) für einen bestimmten Sensor ab.
 
 **Parameter:**
-- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
+- `sensorId` (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
 **Antwort:**
-- Content-Type: application/json
+- Status: `200 OK`
+- Content-Type: `application/json`
 - Body: JSON-Objekt mit sensorId und Daten-Array
+  ```json
+  {
+    "sensorId": "ID742",
+    "data": [
+      {
+        "ts": "1609459200",
+        "value": 1.23
+      },
+      {
+        "ts": "1609545600",
+        "value": 1.45
+      }
+    ]
+  }
+  ```
 
 #### Zählerdaten abrufen
 
-```
+```http
 GET /data/meter/{sensorId}
 ```
 
-Ruft Zählerdaten für einen bestimmten Sensor ab.
+Ruft Zählerdaten (absolute Werte) für einen bestimmten Sensor ab.
 
 **Parameter:**
-- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
+- `sensorId` (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
 **Antwort:**
-- Content-Type: application/json
+- Status: `200 OK`
+- Content-Type: `application/json`
 - Body: JSON-Objekt mit sensorId und Daten-Array
+  ```json
+  {
+    "sensorId": "ID742",
+    "data": [
+      {
+        "ts": "1609459200",
+        "value": 12345.67
+      },
+      {
+        "ts": "1609545600",
+        "value": 12346.89
+      }
+    ]
+  }
+  ```
 
 ### Datenexport-Endpunkte
 
 #### Daten als JSON exportieren
 
-```
+```http
 GET /export/json/{sensorId}
 ```
 
 Exportiert Sensordaten im JSON-Format.
 
 **Parameter:**
-- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
+- `sensorId` (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
 **Antwort:**
-- Content-Type: application/json
+- Status: `200 OK`
+- Content-Type: `application/json`
 - Body: JSON-Array mit Sensordaten
+  ```json
+  [
+    {
+      "sensorId": "ID742",
+      "data": [
+        {
+          "ts": "1609459200",
+          "value": 12345.67
+        },
+        {
+          "ts": "1609545600",
+          "value": 12346.89
+        }
+      ]
+    }
+  ]
+  ```
 
 #### Daten als CSV exportieren
 
-```
+```http
 GET /export/csv/{sensorId}
 ```
 
 Exportiert Sensordaten im CSV-Format.
 
 **Parameter:**
-- sensorId (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
+- `sensorId` (Pfad): ID des Sensors (z.B. "ID735" für Einspeisung, "ID742" für Bezug)
 
 **Antwort:**
-- Content-Type: text/csv
+- Status: `200 OK`
+- Content-Type: `text/csv`
+- Headers: `Content-Disposition: attachment; filename="{sensorId}.csv"`
 - Body: CSV-Daten mit Zeitstempel- und Wertespalten
-- Headers: Content-Disposition: attachment; filename="{sensorId}.csv"
+  ```csv
+  timestamp,value
+  1609459200,12345.67
+  1609545600,12346.89
+  ```
 
 ### Berechnungs-Endpunkte
 
 #### Zählerstände aus Verbrauchsdaten berechnen
 
-```
+```http
 GET /data/calculate
 ```
 
-Berechnet Zählerstände aus Verbrauchsdaten.
+Berechnet Zählerstände (absolute Werte) aus Verbrauchsdaten (relative Werte).
 
 **Parameter:**
-- sensorId (Abfrage, optional): ID des Sensors, für den berechnet werden soll. Wenn nicht angegeben, wird für alle Sensoren berechnet.
+- `sensorId` (Abfrage, optional): ID des Sensors, für den berechnet werden soll. Wenn nicht angegeben, wird für alle Sensoren berechnet.
 
 **Antwort:**
-- Content-Type: application/json
+- Status: `200 OK`
+- Content-Type: `application/json`
 - Body: Erfolgsmeldung mit Liste der verarbeiteten Sensoren
+  ```json
+  "Calculated meter readings from consumption data for ID735, ID742"
+  ```
 
 ## Datenformat
 

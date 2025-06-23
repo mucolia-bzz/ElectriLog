@@ -57,22 +57,24 @@ Der Server startet standardmäßig auf Port 8080.
 Der Client ist eine mit React, TypeScript und Vite erstellte Webanwendung. Um den Client zu starten:
 
 1. Navigieren Sie zum Client-Verzeichnis: `cd client`
-2. Installieren Sie die Abhängigkeiten: `npm install`
-3. Starten Sie den Entwicklungsserver: `npm run dev`
+2. Installieren Sie die Abhängigkeiten: `npm install` oder `yarn`
+3. Starten Sie den Entwicklungsserver: `npm run dev` oder `yarn dev`
 
-Der Client ist standardmäßig unter http://localhost:3000 verfügbar.
+Der Client ist standardmäßig unter http://localhost:5173 verfügbar.
 
 ## API-Endpunkte Übersicht
 
+Die ElectriLog-API bietet verschiedene Endpunkte zum Hochladen, Abrufen, Berechnen und Exportieren von Stromzählerdaten.
+
 ### Daten-Upload
 
-- `POST /data/upload/sdat` - SDAT-Dateien hochladen
-- `POST /data/upload/esl` - ESL-Dateien hochladen
+- `POST /data/upload/sdat` - SDAT-Dateien hochladen (Verbrauchsdaten)
+- `POST /data/upload/esl` - ESL-Dateien hochladen (Zählerstandsdaten)
 
 ### Datenabruf
 
-- `GET /data/consumption/{sensorId}` - Verbrauchsdaten abrufen
-- `GET /data/meter/{sensorId}` - Zählerstandsdaten abrufen
+- `GET /data/consumption/{sensorId}` - Verbrauchsdaten abrufen (relative Werte)
+- `GET /data/meter/{sensorId}` - Zählerstandsdaten abrufen (absolute Werte)
 
 ### Datenexport
 
@@ -83,7 +85,7 @@ Der Client ist standardmäßig unter http://localhost:3000 verfügbar.
 
 - `GET /data/calculate` - Zählerstände aus Verbrauchsdaten berechnen
 
-Weitere Details finden Sie in der [Server-API-Dokumentation](server/README.md).
+Eine detaillierte API-Dokumentation mit Anfrage- und Antwortbeispielen finden Sie in der [Server-API-Dokumentation](server/README.md).
 
 ## Verwendete Technologien
 
