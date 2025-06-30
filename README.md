@@ -61,7 +61,9 @@ Der Client ist eine mit React, TypeScript und Vite erstellte Webanwendung. Um de
 
 1. Navigieren Sie zum Client-Verzeichnis: `cd client`
 2. Installieren Sie die Abhängigkeiten: `npm install` oder `yarn`
-3. Starten Sie den Entwicklungsserver: `npm run dev` oder `yarn dev`
+3. Erstellen Sie das File ElectriLog/client/.env.local und fügen Sie diesen Text ein:
+   `VITE_API_BASE_URL=http://localhost:8080`
+4. Starten Sie den Entwicklungsserver: `npm run dev` oder `yarn dev`
 
 Der Client ist standardmäßig unter http://localhost:5173 verfügbar.
 
