@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.multipart.MultipartFile
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile
  * This controller provides endpoints for uploading, processing, and retrieving meter data.
  */
 @RestController
+@CrossOrigin(origins = ["*"], methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS])
 class DataController {
     @Autowired
     lateinit var meterDataService: MeterDataService
@@ -86,6 +88,7 @@ class DataController {
      * Get meter data for a sensor.
      */
     @GetMapping("/data/meter/{sensorId}")
+    @CrossOrigin(origins = ["*"], methods = [RequestMethod.GET])
     fun getMeterData(@PathVariable sensorId: String): ResponseEntity<Map<String, Any>> {
         val data = meterDataService.getMeterData(sensorId)
         return ResponseEntity.ok(data)
