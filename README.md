@@ -43,29 +43,74 @@ Das System ist in folgende Schichten organisiert:
 - Durchführen von Berechnungen mit den Daten
 - Visualisieren von Daten in Diagrammen und Grafiken
 
-## Erste Schritte
+## Anwendung starten
 
-### Server
+Folgen Sie diesen Schritten, um die ElectriLog-Anwendung zu starten:
 
-Der Server ist eine in Kotlin geschriebene Spring Boot-Anwendung. Um den Server zu starten:
+### Voraussetzungen
 
-1. Navigieren Sie zum Server-Verzeichnis: `cd server`
-2. Bauen Sie die Anwendung: `./gradlew build`
-3. Starten Sie die Anwendung: `./gradlew bootRun`
+- Java Development Kit (JDK) 17 oder höher
+- Node.js (Version 18 oder höher)
+- npm oder yarn
 
-Der Server startet standardmäßig auf Port 8080.
+### Server starten
 
-### Client
+Der Server ist eine in Kotlin geschriebene Spring Boot-Anwendung:
 
-Der Client ist eine mit React, TypeScript und Vite erstellte Webanwendung. Um den Client zu starten:
+1. Öffnen Sie ein Terminal und navigieren Sie zum Server-Verzeichnis:
+   ```
+   cd server
+   ```
+2. Bauen Sie die Anwendung:
+   ```
+   ./gradlew build
+   ```
+3. Starten Sie die Anwendung:
+   ```
+   ./gradlew bootRun
+   ```
 
-1. Navigieren Sie zum Client-Verzeichnis: `cd client`
-2. Installieren Sie die Abhängigkeiten: `npm install` oder `yarn`
+Der Server startet standardmäßig auf Port 8080 und ist unter http://localhost:8080 erreichbar.
+
+### Client starten
+
+Der Client ist eine mit React, TypeScript und Vite erstellte Webanwendung:
+
+1. Öffnen Sie ein neues Terminal und navigieren Sie zum Client-Verzeichnis:
+   ```
+   cd client
+   ```
+2. Installieren Sie die Abhängigkeiten:
+   ```
+   npm install
+   # oder
+   yarn
+   ```
 3. Erstellen Sie das File ElectriLog/client/.env.local und fügen Sie diesen Text ein:
-   `VITE_API_BASE_URL=http://localhost:8080`
-4. Starten Sie den Entwicklungsserver: `npm run dev` oder `yarn dev`
+   ```
+   VITE_API_BASE_URL=http://localhost:8080
+   ```
+4. Starten Sie den Entwicklungsserver:
+   ```
+   npm run dev
+   # oder
+   yarn dev
+   ```
 
 Der Client ist standardmäßig unter http://localhost:5173 verfügbar.
+
+### Produktionsversion erstellen
+
+Um eine Produktionsversion des Clients zu erstellen:
+
+```
+cd client
+npm run build
+# oder
+yarn build
+```
+
+Die Build-Dateien werden im `dist`-Verzeichnis erstellt.
 
 ## API-Endpunkte Übersicht
 
