@@ -36,7 +36,7 @@ export const Header: React.FC<{
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
 
   return (
-    <header className="w-full bg-white dark:bg-gray-800 shadow">
+    <header className="w-full bg-white dark:bg-zinc-900 shadow">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Left: Logo & Title */}
         <div className="flex items-center space-x-2">
@@ -50,10 +50,30 @@ export const Header: React.FC<{
         <div className="flex items-center space-x-4">
           {/* Horizontal tabs for md+ */}
           <TabsList className="hidden md:flex space-x-4">
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="upload">Upload</TabsTrigger>
-            <TabsTrigger value="consumption">Verbrauch</TabsTrigger>
-            <TabsTrigger value="export">Export</TabsTrigger>
+            <TabsTrigger
+              value="dashboard"
+              className="px-4 py-2 data-[state=active]:border-b-2 data-[state=active]:border-primary-500 data-[state=active]:text-primary-600"
+            >
+              Dashboard
+            </TabsTrigger>
+            <TabsTrigger
+              value="upload"
+              className="px-4 py-2 data-[state=active]:border-b-2 data-[state=active]:border-primary-500 data-[state=active]:text-primary-600"
+            >
+              Upload
+            </TabsTrigger>
+            <TabsTrigger
+              value="consumption"
+              className="px-4 py-2 data-[state=active]:border-b-2 data-[state=active]:border-primary-500 data-[state=active]:text-primary-600"
+            >
+              Verbrauch
+            </TabsTrigger>
+            <TabsTrigger
+              value="export"
+              className="px-4 py-2 data-[state=active]:border-b-2 data-[state=active]:border-primary-500 data-[state=active]:text-primary-600"
+            >
+              Export
+            </TabsTrigger>
           </TabsList>
 
           {/* Hamburger menu for small screens */}
@@ -84,7 +104,7 @@ export const Header: React.FC<{
           {/* Dark mode toggle */}
           <button
             onClick={toggleTheme}
-            className="p-2 rounded focus:outline-none hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="p-2 rounded focus:outline-none hover:bg-gray-100 dark:hover:bg-zinc-800"
             aria-label="Toggle dark mode"
           >
             {theme === 'dark' ? (

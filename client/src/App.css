@@ -1,3 +1,33 @@
 button:hover {
   cursor: pointer;
 }
+
+/* Light mode Brush */
+.recharts-brush {
+  /* border of selection area */
+  stroke: #8884d8; /* your old light-mode purple-ish stroke */
+  /* background behind the unselected area */
+  fill: #f1f5f9; /* light gray */
+}
+/* Light mode handles */
+.recharts-brush-traveller {
+  stroke: #8884d8; /* same as brush stroke */
+  fill: #ffffff; /* white handle */
+}
+/* Light mode tick labels inside the brush */
+.recharts-brush .recharts-cartesian-axis-tick-value {
+  fill: #4b5563; /* gray-700 for visibility */
+}
+
+/* Dark mode overrides */
+.dark .recharts-brush {
+  stroke: #6b7280; /* zinc-500 on dark */
+  fill: #374151; /* zinc-700 background */
+}
+.dark .recharts-brush-traveller {
+  stroke: #10b981; /* your green accent */
+  fill: #374151; /* match the dark fill */
+}
+.dark .recharts-brush .recharts-cartesian-axis-tick-value {
+  fill: #f9fafb; /* near-white for labels */
+}
