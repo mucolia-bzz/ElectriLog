@@ -45,25 +45,26 @@ class MeterDataService {
 
         // Process and store consumption data
         uniqueResults.forEach { sdatEntity ->
-            sdatEntity?.meteringData?.let { meteringData ->
-                val documentId = meteringData.documentID ?: return@let
+            sdatEntity?.headerInformation?.instanceDocument?.documentID?.let { documentId ->
                 val sensorId = when {
                     documentId.contains("ID735") -> "ID735" // Einspeisung
                     documentId.contains("ID742") -> "ID742" // Bezug
                     else -> return@let
                 }
 
-                // Get or create TreeMap for this sensor
-                val sensorData = consumptionData.getOrPut(sensorId) { TreeMap() }
+                sdatEntity.meteringData?.let { meteringData ->
+                    // Get or create TreeMap for this sensor
+                    val sensorData = consumptionData.getOrPut(sensorId) { TreeMap() }
 
-                // Process observations
-                meteringData.observations?.forEach { observation ->
-                    val startDateTime = meteringData.interval?.startDateTime ?: return@forEach
-                    val timestamp = parseTimestamp(startDateTime)
-                    val volume = observation.volume ?: return@forEach
+                    // Process observations
+                    meteringData.observations?.forEach { observation ->
+                        val startDateTime = meteringData.interval?.startDateTime ?: return@forEach
+                        val timestamp = parseTimestamp(startDateTime)
+                        val volume = observation.volume ?: return@forEach
 
-                    // Store data (overwrite if duplicate timestamp)
-                    sensorData[timestamp] = Messwert(timestamp, volume, MesswertType.RELATIV)
+                        // Store data (overwrite if duplicate timestamp)
+                        sensorData[timestamp] = Messwert(timestamp, volume, MesswertType.RELATIV)
+                    }
                 }
             }
         }

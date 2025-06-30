@@ -14,12 +14,15 @@ ElectriLog folgt einer Client-Server-Architektur:
 Das System ist in folgende Schichten organisiert:
 
 1. **Präsentationsschicht** (Client)
+
    - Benutzeroberfläche für Datei-Upload, Datenvisualisierung und Export
 
 2. **API-Schicht** (Server)
+
    - RESTful-Endpunkte für Datenverarbeitung, -abruf und -export
 
 3. **Serviceschicht** (Server)
+
    - Geschäftslogik zur Verarbeitung von Zählerdaten
    - Berechnung von Zählerständen aus Verbrauchsdaten
 
@@ -90,12 +93,14 @@ Eine detaillierte API-Dokumentation mit Anfrage- und Antwortbeispielen finden Si
 ## Verwendete Technologien
 
 ### Server
+
 - Spring Boot
 - Kotlin
 - Jackson (JSON/XML-Verarbeitung)
 - JUnit (Testing)
 
 ### Client
+
 - React
 - TypeScript
 - Vite

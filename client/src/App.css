@@ -1,42 +1,33 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+button:hover {
+  cursor: pointer;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+/* Light mode Brush */
+.recharts-brush {
+  /* border of selection area */
+  stroke: #8884d8; /* your old light-mode purple-ish stroke */
+  /* background behind the unselected area */
+  fill: #f1f5f9; /* light gray */
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+/* Light mode handles */
+.recharts-brush-traveller {
+  stroke: #8884d8; /* same as brush stroke */
+  fill: #ffffff; /* white handle */
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Light mode tick labels inside the brush */
+.recharts-brush .recharts-cartesian-axis-tick-value {
+  fill: #4b5563; /* gray-700 for visibility */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Dark mode overrides */
+.dark .recharts-brush {
+  stroke: #6b7280; /* zinc-500 on dark */
+  fill: #374151; /* zinc-700 background */
 }
-
-.card {
-  padding: 2em;
+.dark .recharts-brush-traveller {
+  stroke: #10b981; /* your green accent */
+  fill: #374151; /* match the dark fill */
 }
-
-.read-the-docs {
-  color: #888;
+.dark .recharts-brush .recharts-cartesian-axis-tick-value {
+  fill: #f9fafb; /* near-white for labels */
 }
